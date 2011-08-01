@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<project name="disruptor-example" default="all" basedir=".">
+
+    <property name="dir.main.src" value="src/main"/>
+    <property name="dir.lib" value="lib"/>
+    <property name="dir.main.build" value="target/main/classes"/>
+
+    <property name="dir.reports" value="target/reports"/>
+
+    <path id="classpath">
+        <fileset dir="${dir.lib}">
+            <include name="*.jar"/>
+            <include name="*.zip"/>
+        </fileset>
+    </path>
+
+    <target name="clean"
+            description="Remove the generated files">
+        <delete dir="target"/>
+    </target>
+
+    <target name="main:prepare">
+        <mkdir dir="${dir.main.build}"/>
+    </target>
+
+    <target name="build"
+            depends="main:prepare"
+            description="Build source code">
+        <javac destdir="${dir.main.build}"
+               includeAntRuntime="false"
+               debug="true"
+               nowarn="true">
+            <classpath refid="classpath"/>
+            <src path="${dir.main.src}"/>
+        </javac>
+    </target>
+
+
+    <target name="all" depends="clean, build"/>
+
+</project>
